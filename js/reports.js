@@ -288,73 +288,103 @@ function generateTeachingReport() {
 
 // Download the generated HTML report.
 
+
+/* ========================================
+   DOWNLOAD TEACHING REPORT
+======================================== */
+
 function downloadTeachingReport() {
     if (!generatedReportHtml) {
         alert("Please generate the report first.");
         return;
     }
 
-    let downloadUrl = "";
+    const fileName = "E-Andulus-Teaching-Report.html";
+    const isTelegram = Boolean(window.Telegram?.WebApp);
 
     try {
-        const blob = new Blob([generatedReportHtml], {
-            type: "text/html;charset=utf-8"
-        });
+        const blob = new Blob(
+            [generatedReportHtml],
+            { type: "text/html;charset=utf-8" }
+        );
 
-        downloadUrl = URL.createObjectURL(blob);
-
-        // Detect whether the app is running inside Telegram.
-        const telegram = window.Telegram?.WebApp;
-        const isTelegram = Boolean(telegram);
-
-        const downloadLink = document.createElement("a");
-        downloadLink.href = downloadUrl;
-        downloadLink.download = "E-Andulus-Teaching-Report.html";
-        downloadLink.style.display = "none";
-
-        document.body.appendChild(downloadLink);
+        const downloadUrl = URL.createObjectURL(blob);
 
         if (!isTelegram) {
-            // Normal browser download.
-            downloadLink.click();
-            downloadLink.remove();
+            // Download directly in a normal browser.
+            const link = document.createElement("a");
 
-            setTimeout(() => {
-                URL.revokeObjectURL(downloadUrl);
-            }, 5000);
+            link.href = downloadUrl;
+            link.download = fileName;
+            link.style.display = "none";
 
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            // Do not revoke immediately; the browser needs time to start.
+            setTimeout(() => URL.revokeObjectURL(downloadUrl), 60000);
             return;
         }
 
-        // Telegram WebViews may not handle downloads like browsers.
-        // Open the generated report as a fallback.
-        const reportWindow = window.open(downloadUrl, "_blank");
+        // Telegram fallback:
+        // Open the report in a new tab so it can be printed or saved.
+        // Open synchronously during the button click to reduce popup blocking.
+        const reportWindow = window.open("", "_blank");
 
-        downloadLink.remove();
+        if (reportWindow) {
+            reportWindow.document.open();
+            reportWindow.document.write(generatedReportHtml);
+            reportWindow.document.close();
 
-        if (!reportWindow) {
+            // Keep the Blob URL available in case it is needed.
+            setTimeout(() => URL.revokeObjectURL(downloadUrl), 60000);
+
             alert(
-                "Automatic download may be blocked by Telegram. " +
-                "Please open this app in your browser and download " +
-                "the report there."
+                "The report is open. Use Print and choose Save as PDF " +
+                "to save a copy."
+            );
+        } else {
+            URL.revokeObjectURL(downloadUrl);
+
+            alert(
+                "Telegram blocked opening the report. " +
+                "Open E-Andulus in Chrome or another browser, " +
+                "then generate and download the report."
             );
         }
-
-        // Keep the Blob URL alive while the report is being opened.
-        setTimeout(() => {
-            URL.revokeObjectURL(downloadUrl);
-        }, 60000);
-
     } catch (error) {
         console.error("Report download failed:", error);
 
         alert(
-            "Could not open or download the report. " +
-            "Please try again in your browser."
+            "Could not download the report: " +
+            (error.message || "Unknown error")
         );
-
-        if (downloadUrl) {
-            URL.revokeObjectURL(downloadUrl);
-        }
     }
 }
+
+/* ========================================
+   CONNECT REPORT BUTTONS
+======================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const generateButton =
+        document.getElementById("generateReportButton");
+
+    const downloadButton =
+        document.getElementById("downloadReportButton");
+
+    if (generateButton) {
+        generateButton.addEventListener(
+            "click",
+            generateTeachingReport
+        );
+    }
+
+    if (downloadButton) {
+        downloadButton.addEventListener(
+            "click",
+            downloadTeachingReport
+        );
+    }
+});
