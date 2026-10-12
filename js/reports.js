@@ -287,27 +287,74 @@ function generateTeachingReport() {
 }
 
 // Download the generated HTML report.
+
 function downloadTeachingReport() {
     if (!generatedReportHtml) {
-        alert("Please display the report first.");
+        alert("Please generate the report first.");
         return;
     }
 
-    const blob = new Blob([generatedReportHtml], {
-        type: "text/html;charset=utf-8"
-    });
+    let downloadUrl = "";
 
-    const downloadUrl = URL.createObjectURL(blob);
-    const downloadLink = document.createElement("a");
+    try {
+        const blob = new Blob([generatedReportHtml], {
+            type: "text/html;charset=utf-8"
+        });
 
-    downloadLink.href = downloadUrl;
-    downloadLink.download = "E-Andulus-Teaching-Report.html";
+        downloadUrl = URL.createObjectURL(blob);
 
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    downloadLink.remove();
+        // Detect whether the app is running inside Telegram.
+        const telegram = window.Telegram?.WebApp;
+        const isTelegram = Boolean(telegram);
 
-    setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
+        const downloadLink = document.createElement("a");
+        downloadLink.href = downloadUrl;
+        downloadLink.download = "E-Andulus-Teaching-Report.html";
+        downloadLink.style.display = "none";
 
-    console.log("Teaching report downloaded.");
+        document.body.appendChild(downloadLink);
+
+        if (!isTelegram) {
+            // Normal browser download.
+            downloadLink.click();
+            downloadLink.remove();
+
+            setTimeout(() => {
+                URL.revokeObjectURL(downloadUrl);
+            }, 5000);
+
+            return;
+        }
+
+        // Telegram WebViews may not handle downloads like browsers.
+        // Open the generated report as a fallback.
+        const reportWindow = window.open(downloadUrl, "_blank");
+
+        downloadLink.remove();
+
+        if (!reportWindow) {
+            alert(
+                "Automatic download may be blocked by Telegram. " +
+                "Please open this app in your browser and download " +
+                "the report there."
+            );
+        }
+
+        // Keep the Blob URL alive while the report is being opened.
+        setTimeout(() => {
+            URL.revokeObjectURL(downloadUrl);
+        }, 60000);
+
+    } catch (error) {
+        console.error("Report download failed:", error);
+
+        alert(
+            "Could not open or download the report. " +
+            "Please try again in your browser."
+        );
+
+        if (downloadUrl) {
+            URL.revokeObjectURL(downloadUrl);
+        }
+    }
 }
