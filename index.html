@@ -124,7 +124,7 @@
                     <option value="Grade 12">Grade 12</option>
                 </select>
             </div>
-           
+
             <div>
                 <label for="subject">Subject</label>
                 <input type="text"
@@ -195,6 +195,7 @@
         </section>
 
         <!-- Review Teaching Records -->
+        <!-- Review Teaching Records -->
         <section id="report-section">
             <h2>Review Teaching Records</h2>
 
@@ -207,17 +208,27 @@
                 <!-- All saved records will appear here -->
             </div>
 
-            <button type="button" id="generateReportButton">
-                Generate Report
-            </button>
+            <div class="report-actions">
+                <button type="button"
+                        id="generateReportButton"
+                        onclick="generateTeachingReport()">
+                    Generate Report
+                </button>
 
-            <button type="button" id="backButton">
-                Back to Records
-            </button>
+                <button type="button"
+                        id="downloadReportButton"
+                        onclick="downloadTeachingReport()">
+                    Download Report
+                </button>
 
-            <button type="button" id="clearAllButton">
-                Clear All Records
-            </button>
+                <button type="button" id="backButton">
+                    Back to Records
+                </button>
+
+                <button type="button" id="clearAllButton">
+                    Clear All Records
+                </button>
+            </div>
         </section>
 
     </main>
