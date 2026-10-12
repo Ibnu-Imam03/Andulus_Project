@@ -1,0 +1,230 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Andulus - Teaching Session Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/storage.js" defer></script>
+    <script src="js/volunteers.js" defer></script>
+    <script src="js/sessions.js" defer></script>
+    <script src="js/reports.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>E-Andulus</h1>
+        <p>Teaching Session Management System</p>
+    </header>
+
+    <main>
+
+        <!-- 1. Executive Information -->
+        <section id="executive-information">
+            <h2>1. Executive Information</h2>
+
+            <div>
+                <label for="executiveName">Executive Name</label>
+                <input type="text"
+                       id="executiveName"
+                       name="executiveName"
+                       placeholder="Enter executive name"
+                       required>
+            </div>
+        </section>
+
+        <!-- 2. Andulus Member Information -->
+        <section id="andulus-information">
+            <h2>2. Andulus Member Information</h2>
+
+            <div>
+                <label for="andulusName">Andulus Name</label>
+                <input type="text"
+                       id="andulusName"
+                       name="andulusName"
+                       placeholder="Enter Andulus name"
+                       required>
+            </div>
+
+            <div>
+                <label for="andulusId">Andulus ID</label>
+                <input type="text"
+                       id="andulusId"
+                       name="andulusId"
+                       placeholder="Enter Andulus ID"
+                       required>
+            </div>
+
+            <div>
+                <label for="andulusSex">Andulus Sex</label>
+                <select id="andulusSex" name="andulusSex" required>
+                    <option value="">Select sex</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Teaching Details -->
+        <section id="teaching-details">
+            <h2>Teaching Details</h2>
+
+            <div class="form-group">
+                <label for="startTime">Start Time</label>
+                <input type="time" id="startTime" name="startTime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="endTime">End Time</label>
+                <input type="time" id="endTime" name="endTime" required>
+            </div>
+
+            <div>
+                <label for="shift">Shift</label>
+                <select id="shift" name="shift" required>
+                    <option value="">Select Shift</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Evening">Evening</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- 3. Child Information -->
+        <section id="child-information">
+            <h2>3. Child Information</h2>
+
+            <div>
+                <label for="childName">Child Name</label>
+                <input type="text"
+                       id="childName"
+                       name="childName"
+                       placeholder="Enter child name"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="grade">Grade</label>
+                <select id="grade" name="grade" required>
+                    <option value="">Select Grade</option>
+                    <option value="Grade 1">Grade 1</option>
+                    <option value="Grade 2">Grade 2</option>
+                    <option value="Grade 3">Grade 3</option>
+                    <option value="Grade 4">Grade 4</option>
+                    <option value="Grade 5">Grade 5</option>
+                    <option value="Grade 6">Grade 6</option>
+                    <option value="Grade 7">Grade 7</option>
+                    <option value="Grade 8">Grade 8</option>
+                    <option value="Grade 9">Grade 9</option>
+                    <option value="Grade 10">Grade 10</option>
+                    <option value="Grade 11">Grade 11</option>
+                    <option value="Grade 12">Grade 12</option>
+                </select>
+            </div>
+           
+            <div>
+                <label for="subject">Subject</label>
+                <input type="text"
+                       id="subject"
+                       name="subject"
+                       placeholder="Enter subject"
+                       required>
+            </div>
+
+            <div>
+                <label for="topic">Topic</label>
+                <input type="text"
+                       id="topic"
+                       name="topic"
+                       placeholder="Enter topic"
+                       required>
+            </div>
+
+            <div>
+                <label for="startingPoint">Starting Point</label>
+                <input type="text"
+                       id="startingPoint"
+                       name="startingPoint"
+                       placeholder="Enter starting point"
+                       required>
+            </div>
+
+            <div>
+                <label for="stoppingPoint">Stopping Point</label>
+                <input type="text"
+                       id="stoppingPoint"
+                       name="stoppingPoint"
+                       placeholder="Enter stopping point"
+                       required>
+            </div>
+
+            <!-- Homework Information -->
+            <fieldset>
+                <legend>Homework Information</legend>
+
+                <div>
+                    <label for="homeworkAssigned">Homework Assigned</label>
+                    <select id="homeworkAssigned"
+                            name="homeworkAssigned"
+                            required>
+                        <option value="">Select answer</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div id="homeworkCompletedContainer">
+                    <label for="homeworkCompleted">Homework Completed</label>
+                    <select id="homeworkCompleted" name="homeworkCompleted">
+                        <option value="">Select answer</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </fieldset>
+        </section>
+
+        <!-- Save and Clear Form -->
+        <section id="save-section">
+            <button type="button" id="saveButton">Save Record</button>
+
+            <button type="button" id="clearButton">Clear Form</button>
+        </section>
+
+        <!-- Review Teaching Records -->
+        <section id="report-section">
+            <h2>Review Teaching Records</h2>
+
+            <p>
+                Review all saved teaching records before generating
+                the final report.
+            </p>
+
+            <div id="reportRecords">
+                <!-- All saved records will appear here -->
+            </div>
+
+            <button type="button" id="generateReportButton">
+                Generate Report
+            </button>
+
+            <button type="button" id="backButton">
+                Back to Records
+            </button>
+
+            <button type="button" id="clearAllButton">
+                Clear All Records
+            </button>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>E-Andulus Teaching Session Management System</p>
+    </footer>
+
+</body>
+</html>

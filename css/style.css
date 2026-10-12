@@ -1,0 +1,375 @@
+﻿
+/* ========================================
+   1. GENERAL SETTINGS
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #176b50;
+    --primary-hover: #10553e;
+    --light-green: #eaf5ef;
+    --background-color: #f4f7f5;
+    --white-color: #ffffff;
+    --text-color: #26372e;
+    --muted-color: #6b7b71;
+    --border-color: #dce5df;
+    --danger-color: #c0392b;
+}
+
+body {
+    margin: 0;
+    padding: 24px 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #00A6FF;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   2. HEADER
+======================================== */
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    header h1 {
+        color: var(--primary-color);
+        font-size: 32px;
+        margin-bottom: 5px;
+    }
+
+    header p {
+        color: var(--muted-color);
+        margin-top: 0;
+        font-size: 15px;
+    }
+
+/* ========================================
+   3. MAIN CONTENT
+======================================== */
+
+main {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+section {
+    background-color: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+    section h2 {
+        color: var(--primary-color);
+        font-size: 20px;
+        margin-top: 0;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+/* ========================================
+   4. FORM LAYOUT
+======================================== */
+
+form > section > div,
+fieldset > div {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+input,
+select {
+    display: block;
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid #cbd8ce;
+    border-radius: 7px;
+    background-color: var(--white-color);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    input:focus,
+    select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(23, 107, 80, 0.12);
+    }
+
+    input::placeholder {
+        color: #9aa69e;
+    }
+
+/* ========================================
+   5. HOMEWORK FIELDSET
+======================================== */
+
+fieldset {
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    padding: 18px;
+    margin: 24px 0 0;
+    background-color: var(--light-green);
+}
+
+legend {
+    color: var(--primary-color);
+    font-weight: 700;
+    padding: 0 8px;
+}
+
+fieldset > div:last-child {
+    margin-bottom: 0;
+}
+
+/* ========================================
+   6. BUTTONS
+======================================== */
+
+button {
+    display: inline-block;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+    button:hover {
+        transform: translateY(-1px);
+    }
+
+    button:focus-visible {
+        outline: 3px solid #93c5aa;
+        outline-offset: 3px;
+    }
+
+#saveButton,
+#generateButton,
+#generateReportButton {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+    #saveButton:hover,
+    #generateButton:hover,
+    #generateReportButton:hover {
+        background-color: var(--primary-hover);
+    }
+
+#clearButton,
+#backButton {
+    background-color: #e8eee9;
+    color: var(--primary-color);
+}
+
+    #clearButton:hover,
+    #backButton:hover {
+        background-color: #dce8df;
+    }
+
+#save-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* ========================================
+   7. SAVED RECORDS
+======================================== */
+
+#record-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+#recordCount {
+    color: var(--muted-color);
+    font-size: 14px;
+}
+
+#savedRecords,
+#reportRecords {
+    margin-top: 18px;
+}
+
+.record {
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+    .record h3 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    .record p {
+        margin: 7px 0;
+        font-size: 14px;
+    }
+
+/* ========================================
+   8. REPORT SECTION
+======================================== */
+
+#report-section {
+    background-color: var(--white-color);
+}
+
+    #report-section > p {
+        color: var(--muted-color);
+    }
+
+    #report-section button {
+        margin: 5px 5px 5px 0;
+    }
+
+/* ========================================
+   9. FOOTER
+======================================== */
+
+footer {
+    max-width: 850px;
+    margin: 30px auto 0;
+    text-align: center;
+    color: var(--muted-color);
+    font-size: 13px;
+}
+
+/* ========================================
+   10. RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 600px) {
+    body {
+        padding: 16px 10px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    section {
+        padding: 18px 14px;
+    }
+
+        section h2 {
+            font-size: 18px;
+        }
+
+    #record-filters {
+        grid-template-columns: 1fr;
+    }
+
+    #save-section {
+        flex-direction: column;
+    }
+
+        #save-section button,
+        #saved-records-section > button,
+        #report-section button {
+            width: 100%;
+            margin: 5px 0;
+        }
+}
+
+
+/* ========================================
+   HORIZONTAL SCROLLING FOR REPORT TABLE
+======================================== */
+
+.table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+}
+
+    .table-wrapper table {
+        min-width: 1400px;
+        width: max-content;
+        border-collapse: collapse;
+    }
+
+    .table-wrapper th,
+    .table-wrapper td {
+        padding: 12px 16px;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+
+/* ========================================
+   11. PRINT SETTINGS
+======================================== */
+
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+    }
+
+    header,
+    footer,
+    #executive-information,
+    #andulus-information,
+    #child-information,
+    #save-section,
+    #saved-records-section,
+    #report-section button {
+        display: none;
+    }
+
+    main {
+        max-width: 100%;
+    }
+
+    section {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .record {
+        break-inside: avoid;
+        border: 1px solid #999;
+        box-shadow: none;
+    }
+
+
+}
